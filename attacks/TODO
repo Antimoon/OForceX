@@ -1,0 +1,11 @@
+#brute-force
+#    username
+#    mfa answer
+#    password
+
+# Audits
+#    Entropy Analysis
+#    Injection Attacks
+#    Timestamp Validation Check
+#    Check for anonymous auth
+#    Fuzz certificate ids

